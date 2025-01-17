@@ -10,16 +10,24 @@ import AuthProvider from './Providers/AuthProvider.jsx'
 import Home from './Components/Home/Home.jsx'
 import Orders from './Components/Orders/Orders.jsx'
 import PrivateRoute from './Components/routes/PrivateRoute/PrivateRoute.jsx'
+import Profile from './Components/Profile/Profile.jsx'
+import ErrorPage from './Root/ErrorPage.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement:<ErrorPage/>,
     children: [
       {
         path: "/",
         element: <Home />
       },
+      {
+        path: "/hero",
+        element: <Hero />
+      },
+      
       {
         path: "/hero",
         element: <Hero />
@@ -35,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <PrivateRoute><Orders /></PrivateRoute>
+      },
+      {
+        path: "/profile",
+        element: <PrivateRoute><Profile /></PrivateRoute>
       },
     ]
   }

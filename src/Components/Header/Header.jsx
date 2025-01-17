@@ -1,21 +1,29 @@
 import { useContext } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../Providers/AuthProvider"
 
 
 const Header = () => {
     const { user, signOutUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const links = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        {user && <li><NavLink to={'/orders'}>Orders</NavLink></li>}
-        <li><NavLink to={'/login'}>LogIn</NavLink></li>
-        <li><NavLink to={'/register'}>Register</NavLink></li>
+        {user
+            && <>
+                <li><NavLink to={'/orders'}>Orders</NavLink></li>
+                <li><NavLink to={'/profile'}>Profile</NavLink></li>
+                <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+            </>
+        }
+
     </>
 
     const handleLogOut = () => {
         signOutUser()
-            .then(() => console.log('User Logged Out Successfully'))
+            .then(() => {
+                console.log('User Logged Out Successfully')
+                navigate('/')
+            })
             .catch(error => console.log(error.message))
     }
 
@@ -51,16 +59,18 @@ const Header = () => {
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end flex gap-3">
                     {user ?
                         <>
-                            <span>{user.email}</span>
                             <a onClick={handleLogOut} className="btn btn-sm">Sign Out</a>
+                            {
+                                user.photoURL ? <img className="w-10 rounded-full" src={`${user?.photoURL}`} alt="" /> : <h1 className="md:text-xl text-xs">{user.email}</h1>
+                            }
                         </>
                         :
-                        <Link to={'/login'}>
-                            <button className="btn btn-sm">Login</button>
-                        </Link>
+                        <ul className="menu menu-horizontal px-1">
+                            <NavLink className={'bg-emerald-500 text-white py-2 rounded-lg active:scale-95 hover:bg-emerald-400 transition-all px-4 btn-primary'} to={'/login'}>LogIn</NavLink>
+                        </ul>
                     }
                 </div>
             </div>

@@ -1,6 +1,5 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react"
-import PropTypes from 'prop-types';
 import auth from "../Firebase/firebase.config";
 
 export const AuthContext = createContext(null)
@@ -14,17 +13,29 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
-    
+
     const signinUser = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
-    
-    const signOutUser = () =>{
+
+    const googleProvider = new GoogleAuthProvider();
+
+    const signInWithGoogle = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider)
+
+    }
+
+    const emailVerification = () =>{
+        return sendEmailVerification(auth.currentUser)
+    }
+
+    const signOutUser = () => {
         setLoading(true);
         return signOut(auth)
     }
-    
+
     // Observe on state change 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
@@ -41,12 +52,14 @@ const AuthProvider = ({ children }) => {
 
 
 
-    const authInfo = { 
-        user, 
-        createUser, 
-        signinUser ,
+    const authInfo = {
+        user,
+        loading,
+        createUser,
+        signinUser,
+        signInWithGoogle,
         signOutUser,
-        loading
+        emailVerification
     }
 
     return (
@@ -59,14 +72,3 @@ const AuthProvider = ({ children }) => {
 
 export default AuthProvider;
 
-AuthProvider.propTypes = {
-    children: PropTypes.node
-}
-
-/**
- * 1. Create Context and export it
- * 2. set provider with value
- * 3. use the auth provider in the main.jsx file
- * 4. access children in the authProvider component as children as use it in the middle of the Provider
- * 5.
- */

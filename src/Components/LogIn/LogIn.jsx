@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
 
@@ -9,8 +10,6 @@ const LogIn = () => {
 
   const [success, setSuccess] = useState('')
   const [logInError, setLoginError] = useState('')
-
-
 
   const handleLogin = e => {
     e.preventDefault()
@@ -47,6 +46,9 @@ const LogIn = () => {
   }
   return (
     <div className="">
+      <Helmet>
+        <title>Auth Recap | Login</title>
+      </Helmet>
       <div className="hero  min-h-[90vh] max-w-screen-2xl mx-auto">
         <div className="hero-content  flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">

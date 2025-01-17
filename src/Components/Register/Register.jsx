@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext)
@@ -31,11 +32,11 @@ const [success, setSuccess] = useState('')
   }
 
   
-
-
-
   return (
     <div className="">
+      <Helmet>
+        <title>Auth Recap | Register</title>
+      </Helmet>
       <div className="hero  min-h-[90vh] max-w-screen-2xl mx-auto">
         <div className="hero-content  flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">

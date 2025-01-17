@@ -12,12 +12,13 @@ import Orders from './Components/Orders/Orders.jsx'
 import PrivateRoute from './Components/routes/PrivateRoute/PrivateRoute.jsx'
 import Profile from './Components/Profile/Profile.jsx'
 import ErrorPage from './Root/ErrorPage.jsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
         path: "/hero",
         element: <Hero />
       },
-      
+
       {
         path: "/hero",
         element: <Hero />
@@ -54,8 +55,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </HelmetProvider>
   </StrictMode>,
 )

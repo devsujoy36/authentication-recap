@@ -1,7 +1,11 @@
+import { Helmet } from "react-helmet-async"
 
 const Orders = () => {
     return (
         <div className="py-10 bg-white min-h-[80vh] border">
+            <Helmet>
+                <title>Auth Recap | Orders</title>
+            </Helmet>
             <div className="max-w-screen-2xl md:mx-auto mx-10">
                 <h2>Your personal order history</h2>
                 <ul>
@@ -10,7 +14,7 @@ const Orders = () => {
                     <li>item-3</li>
                     <li>item-4</li>
                     <li>item-5</li>
-                </ul> 
+                </ul>
             </div>
         </div>
     )

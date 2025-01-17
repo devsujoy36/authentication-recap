@@ -1,15 +1,15 @@
 import { useContext } from "react"
 import { AuthContext } from "../../Providers/AuthProvider"
-
+import { Helmet } from "react-helmet-async"
 
 const Profile = () => {
     const { user, emailVerification } = useContext(AuthContext)
     const handleEmailVerifiation = () => {
         emailVerification()
-            .then(res=>{
+            .then(res => {
                 console.log(res.user);
             })
-            .catch(error=>{
+            .catch(error => {
                 console.log(error.message);
             })
     }
@@ -18,6 +18,9 @@ const Profile = () => {
     const { creationTime, lastSignInTime, } = metadata;
     return (
         <div className="my-10">
+            <Helmet>
+                <title>Auth Recap | Profile</title>
+            </Helmet>
             <div className="max-w-screen-2xl lg:mx-auto mx-10 flex justify-center items-center min-h-[80vh]">
                 <div>
                     <div className="flex gap-5 items-center">

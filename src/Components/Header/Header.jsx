@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../Providers/AuthProvider"
 
 
@@ -52,7 +52,7 @@ const Header = () => {
                             {links}
                         </ul>
                     </div>
-                    <a href="/" className="btn btn-ghost text-xl">Auth Moha Milon</a>
+                    <a href="/" className="btn btn-ghost text-xl">Firebase Auth 36</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

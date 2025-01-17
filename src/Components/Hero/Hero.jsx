@@ -1,15 +1,17 @@
+import { Helmet } from "react-helmet-async"
 import { useNavigate } from "react-router-dom"
 
 const Hero = () => {
   const navigate = useNavigate()
-  const getStartedHandler = () =>{
+  const getStartedHandler = () => {
     navigate('/login')
   }
   return (
     <div>
-      <div
-        className="hero min-h-[90vh] px-10"
-        >
+      <Helmet>
+        <title>Auth Recap | Hero</title>
+      </Helmet>
+      <div className="hero min-h-[90vh] px-10" >
         <div className="hero-overlay bg-opacity-5"></div>
         <div className="hero-content text-center">
           <div className="max-w-md text-white">

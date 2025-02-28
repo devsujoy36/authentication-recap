@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 const Register = () => {
   const { createUser } = useContext(AuthContext)
 
-const [success, setSuccess] = useState('')
+  const [success, setSuccess] = useState('')
   const [registerError, setRegisterError] = useState('')
 
   const handleRegister = e => {
@@ -31,7 +31,7 @@ const [success, setSuccess] = useState('')
       })
   }
 
-  
+
   return (
     <div className="">
       <Helmet>
